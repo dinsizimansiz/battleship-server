@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/dinsizimansiz/battleship-server#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "eosjs": "^20.0.0-beta2",
+    "express": "^4.16.4",
+    "node-fetch": "^2.2.0"
   }
 }
