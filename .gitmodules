@@ -1,0 +1,3 @@
+[submodule "eosbattleshipdemux"]
+	path = eosbattleshipdemux
+	url = https://github.com/dinsizimansiz/eosbattleshipdemux
