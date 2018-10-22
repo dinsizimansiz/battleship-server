@@ -9,7 +9,7 @@ const unplacedShips = async (req, res) => {
         var dbConnection = app.get("dbConnection");
         var game = await dbConnection.collection("games").findOne({$or : [{host : {userid : userid}},{challenger : { userid : userid }}]});
         var user = getUser(game,gameid);
-        const ships = printers.unplacedShips(user.playerTable);
+        const ships = printers.placedShips(user.playerTable);
         return res.status(200).json({
            success : true,
            payload : ships

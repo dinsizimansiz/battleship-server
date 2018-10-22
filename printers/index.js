@@ -1,9 +1,9 @@
 const table = require("./table");
 const remainingShips = require("./remainingShips");
-const unplacedShips = require("./unplacedships");
+const placedShips = require("./placedShips");
 
 module.exports = {
   table,
   remainingShips,
-  unplacedShips
+  placedShips
 };

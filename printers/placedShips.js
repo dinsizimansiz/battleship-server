@@ -1,6 +1,6 @@
 const {getShipName} = require("../eosbattleshipdemux/utils");
 
-const remainingShips = (playerTable) =>{
+const placedShips = (playerTable) =>{
 
     let availableShips = {
         "0" : true,
@@ -10,7 +10,7 @@ const remainingShips = (playerTable) =>{
         "4" : false,
         "5" : false
     };
-    let remainingShips = [];
+    let placedShips = [];
 
     playerTable.forEach(function(item){
         if(!availableShips[item])
@@ -21,13 +21,13 @@ const remainingShips = (playerTable) =>{
 
     for(var i = 1; i < 6; i++)
     {
-        if(!availableShips[i.toString()])
+        if(availableShips[i.toString()])
         {
-            remainingShips.push(getShipName(i.toString()));
+            placedShips.push(getShipName(i.toString()));
         }
     }
 
-    return remainingShips.join("\n") + "\n";
+    return placedShips.join("\n") + "\n";
 };
 
-module.exports = remainingShips;
+module.exports = placedShips;
