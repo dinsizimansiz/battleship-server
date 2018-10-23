@@ -1,10 +1,17 @@
 const {getOpponent} = require("../../eosbattleshipdemux/utils");
 const {table} = require("../../printers");
+const {MongoClient} = require("mongodb");
+const adapter = require("../../eosbattleshipdemux/utils/adapter");
+
 
 const opponentGuesses = async (req,res) => {
 
-    let userid = req.body.userid;
-    const dbConnection = app.get("dbConnection")();
+    let username = req.body.username;
+    var userid = adapter.usedAccounts[username].accountName;
+    var dbConnection ;
+    MongoClient().connect("mongodb://localhost:27017",function(err,dbObject) {
+        dbConnection = dbObject.db("battleship")
+    });
     try
     {
         var game = await dbConnection.collection("games").findOne({$or : [{host : {userid : userid}},{challenger : {userid : userid}}]});

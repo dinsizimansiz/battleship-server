@@ -4,8 +4,16 @@ const fetch = require("node-fetch");
 
 const placeShip = async (req,res) => {
 
-    const userid = req.body.username;
-    const privateKey = req.body.privateKey;
+    let username = req.body.username;
+    if(adapter.usedAccounts[username] === undefined)
+    {
+        return res.status(400).json({
+            success : false,
+            err : "Player is not in a match."
+        });
+    }
+    const userid = adapter.usedAccounts[username].accountName;
+    const privateKey = adapter.usedAccounts[username].privateKey;
     const direction = req.body.direction;
     const shipName = req.body.shipName;
     const x = req.body.x;

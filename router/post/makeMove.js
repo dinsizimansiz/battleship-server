@@ -1,11 +1,19 @@
 const { Api, JsonRpc, RpcError, JsSignatureProvider } = require("eosjs");
 const fetch = require("node-fetch");
-
+const adapter = require("../../eosbattleshipdemux/utils/adapter");
 
 const makeMove = async (req,res) => {
 
-    const userid = req.body.username;
-    const privateKey = req.body.privateKey;
+    let username = req.body.username;
+    if(adapter.usedAccounts[username] === undefined)
+    {
+        return res.status(400).json({
+            success : false,
+            err : "Player is not in a match."
+        });
+    }
+    const userid = adapter.usedAccounts[username].accountName;
+    const privateKey = adapter.usedAccounts[username].privateKey;
     const x = req.body.x;
     const y = req.body.y;
     const signatureProvider = new JsSignatureProvider([privateKey]);
