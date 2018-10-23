@@ -1,4 +1,3 @@
-const bothTables = require("./bothTables");
 const enemyTable = require("./enemyTable");
 const getFreeShips = require("./unplacedShips");
 const getPlacedShips =  require("./remainingShips");
@@ -7,7 +6,6 @@ const playerTable = require("./playerTable");
 
 
 module.exports = {
-    bothTables,
     enemyTable,
     getPlacedShips,
     playerTable,

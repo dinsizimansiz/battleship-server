@@ -7,7 +7,7 @@ const printTable = (table) => {
 
     for(var y = 0; i < 10;y++)
     {
-        var lineString = i.toString() + ;
+        var lineString = i.toString() ;
 
         for(var x = 0; x < 10;x++)
         {

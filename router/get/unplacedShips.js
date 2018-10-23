@@ -1,4 +1,4 @@
-const printers = require("printers");
+const printers = require("../../printers");
 const {getUser} = require("../../eosbattleshipdemux/utils");
 
 const unplacedShips = async (req, res) => {

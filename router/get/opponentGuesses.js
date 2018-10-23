@@ -1,5 +1,5 @@
 const {getOpponent} = require("../../eosbattleshipdemux/utils");
-const {table} = require("printers");
+const {table} = require("../../printers");
 
 const opponentGuesses = async (req,res) => {
 

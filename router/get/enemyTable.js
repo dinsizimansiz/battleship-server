@@ -1,5 +1,5 @@
 const {getUser} = require("../../eosbattleshipdemux/utils");
-const {table} = require("printers");
+const {table} = require("../../printers");
 
 const playerTable = async (req,res) => {
 
