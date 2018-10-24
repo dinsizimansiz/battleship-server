@@ -9,13 +9,26 @@ const remainingShips = async (req, res) => {
     let username = req.body.username;
     var userid = adapter.usedAccounts[username].accountName;
     var dbConnection ;
+    if(adapter.usedAccounts[username] === undefined)
+    {
+        res.status(400).json({
+            success : false,
+            err : "User is not in a game."
+        });
+    }
     MongoClient().connect("mongodb://localhost:27017",function(err,dbObject) {
+        if(err)
+        {
+            return res.status.json({
+                success : false,
+                err : err
+            });
+        }
         dbConnection = dbObject.db("battleship")
     });
 
     try
     {
-        var dbConnection = app.get("dbConnection");
         var game = await dbConnection.collection("games").findOne({$or : [{host : {userid : userid}},{challenger : { userid : userid }}]});
         var user = getUser(game,gameid);
         const ships = printers.remainingShips(user.playerTable);

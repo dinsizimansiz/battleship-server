@@ -1,4 +1,4 @@
-const { Api, JsonRpc, RpcError, JsSignatureProvider } = require("eosjs");
+const { Api, JsonRpc, JsSignatureProvider } = require("eosjs");
 const fetch = require("node-fetch");
 var adapter = require("../../eosbattleshipdemux/utils/adapter");
 var users = require("users");
@@ -6,7 +6,13 @@ var users = require("users");
 const enqueue = async (req,res) => {
 
     const username  = req.body.username;
-
+    if(adapter.usedAccounts[username] !== undefined)
+    {
+        res.status(400).json({
+            success : false,
+            err : "User is already in a match."
+        });
+    }
     if(users.includes(username) )
     {
         return res.status(400).json({
@@ -17,7 +23,7 @@ const enqueue = async (req,res) => {
     else
     {
         users.push(username);
-        if(users.length == 2)
+        if(users.length === 2)
         {
             let host = users[0];
             let challenger = users[1];

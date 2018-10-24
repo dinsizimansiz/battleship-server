@@ -7,6 +7,7 @@ router.get("/placedships",getMethods.getPlacedShips);
 router.get("/freeships",getMethods.getFreeShips);
 router.get("/playertable",getMethods.playerTable);
 router.get("/opponentguesses",getMethods.getOpponentGuesses);
+router.get("/status",getMethods.status);
 router.post("/dequeue",postMethods.dequeue);
 router.post("/enqueue",postMethods.enqueue);
 router.post("/makesove",postMethods.makeMove);
