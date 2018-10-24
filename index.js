@@ -16,6 +16,4 @@ var io = require("./eosbattleshipdemux/utils/io");
 io.connect(server);
 
 
-
-
 actionWatcher.watch();

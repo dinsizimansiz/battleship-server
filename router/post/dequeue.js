@@ -1,4 +1,4 @@
-var users = require("users");
+var users = require("../../users");
 var adapter = require("../../eosbattleshipdemux/utils/adapter");
 
 const dequeue = async (req,res) => {

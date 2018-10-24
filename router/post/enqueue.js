@@ -1,7 +1,7 @@
 const { Api, JsonRpc, JsSignatureProvider } = require("eosjs");
 const fetch = require("node-fetch");
 var adapter = require("../../eosbattleshipdemux/utils/adapter");
-var users = require("users");
+var users = require("../../users");
 
 const enqueue = async (req,res) => {
 
