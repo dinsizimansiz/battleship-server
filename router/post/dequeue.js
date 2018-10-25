@@ -14,7 +14,7 @@ const dequeue = async (req,res) => {
 
     if(adapter.usedAccounts[username] !== undefined)
     {
-        res.status(400).json({
+        return res.status(400).json({
             success : false,
             err : "User is already in a match."
         });

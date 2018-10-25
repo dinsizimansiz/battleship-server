@@ -9,7 +9,7 @@ const unplacedShips = async (req, res) => {
     var userid = adapter.usedAccounts[username].accountName;
     if(adapter.usedAccounts[username] === undefined)
     {
-        res.status(400).json({
+        return res.status(400).json({
             success : false,
             err : "User is not in a game."
         });
