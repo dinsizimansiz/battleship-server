@@ -33,8 +33,8 @@ const opponentGuesses = async (req,res) => {
                     err : err
                 });
             }
-            let dbConnection = dbObject.db("battleship")
-            let game = dbConnection.collection("games").findOne({$or : [{"host.userid": userid},{"challenger.userid" : userid}]})
+            let dbConnection = dbObject.db("battleship");
+            dbConnection.collection("games").findOne({$or : [{"host.userid": userid},{"challenger.userid" : userid}]})
                 .then((game) => {
                     let opponent = getOpponent(game,userid);
                     const opponentTable = table(opponent.enemyTable);
