@@ -31,7 +31,7 @@ const makeMove = async (req,res) => {
     const api = new Api({rpc,signatureProvider,textDecoder:new TextDecoder(),textEncoder:new TextEncoder()});
     try
     {
-        api.transact({
+        await api.transact({
             actions : [{
                 account : "battleship",
                 name : "makemove",
@@ -48,12 +48,12 @@ const makeMove = async (req,res) => {
         }, {
             blocksBehind: 3,
             expireSeconds: 30,
-        }).then(() => {
-
-            return res.status(201).json({
-                success : true
-            });
         });
+
+        return res.status(201).json({
+            success : true
+        });
+
 
     }
     catch(err)
