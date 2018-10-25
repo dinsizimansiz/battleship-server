@@ -33,6 +33,13 @@ isTurn = async (req,res) => {
         let dbConnection = dbObject.db("battleship");
         dbConnection.collection("games").findOne({$or : [{"host.userid": userid},{"challenger.userid" : userid }]})
             .then((game) =>{
+                if(game == null)
+                {
+                    return res.status(400).json({
+                        success : false,
+                        payload : "Game is not found."
+                    });
+                }
                 if(game.started === false)
                 {
                     return res.status(200).json({

@@ -23,7 +23,6 @@ const ready = async (req,res) => {
     }
     const userid = adapter.usedAccounts[username].accountName;
     const privateKey = adapter.usedAccounts[username].privateKey;
-    const shipName = req.query.shipname;
     const signatureProvider = new JsSignatureProvider([privateKey]);
     const rpc = new JsonRpc("http://127.0.0.1:8888", {fetch});
     const api = new Api({rpc,signatureProvider,textDecoder:new TextDecoder(),textEncoder:new TextEncoder()});
