@@ -34,13 +34,16 @@ const opponentGuesses = async (req,res) => {
                 });
             }
             let dbConnection = dbObject.db("battleship")
-            let game = dbConnection.collection("games").findOne({$or : [{"host.userid": userid},{"challenger.userid" : userid}]});
-            let opponent = getOpponent(game,userid);
-            const table = table(opponent.enemyTable);
-            return res.status(200).json({
-                success : true,
-                payload : table
-            });
+            let game = dbConnection.collection("games").findOne({$or : [{"host.userid": userid},{"challenger.userid" : userid}]})
+                .then((game) => {
+                    let opponent = getOpponent(game,userid);
+                    const opponentTable = table(opponent.enemyTable);
+                    return res.status(200).json({
+                        success : true,
+                        payload : opponentTable
+                    });
+                });
+
         });
 
     }
