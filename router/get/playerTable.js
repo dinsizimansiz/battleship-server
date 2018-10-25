@@ -34,7 +34,8 @@ const playerTable = async (req,res) => {
                 });
             }
             let dbConnection = dbObject.db("battleship");
-            dbConnection.collection("games").findOne({$or : [{"host.userid" : userid},{"challenger.userid" :userid}]},function(err,game){
+            dbConnection.collection("games").findOne({$or : [{"host.userid" : userid},{"challenger.userid" :userid}]})
+            .then((game) =>{
                 let user = getUser(game,userid);
                 const playerTable = table(user.playerTable);
                 return res.status(200).json({
