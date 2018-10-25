@@ -17,21 +17,21 @@ const status = (req,res) => {
     {
         return res.status(200).json({
             success : true,
-            status : 2
+            payload : 2
         });
     }
     else if(users.includes(username))
     {
         return res.status(200).json({
             success : true,
-            status : 1
+            payload : 1
         });
     }
     else
     {
         return res.status(200).json({
             success : true,
-            status : 0
+            payload : 0
         });
     }
 
