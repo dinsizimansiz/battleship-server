@@ -14,8 +14,6 @@ const unplacedShips = async (req, res) => {
             err : "User is not in a game."
         });
     }
-
-
     try
     {
         MongoClient("mongodb://localhost:27017").connect(function(err,dbObject) {

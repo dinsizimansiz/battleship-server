@@ -4,6 +4,9 @@ const getPlacedShips =  require("./remainingShips");
 const getOpponentGuesses = require("./opponentGuesses");
 const playerTable = require("./playerTable");
 const status = require("./status");
+const checkForTurn = require("./isTurn");
+const gameStarted = require("./gameStarted");
+
 
 module.exports = {
     enemyTable,
@@ -11,5 +14,7 @@ module.exports = {
     playerTable,
     getFreeShips,
     getOpponentGuesses,
-    status
+    status,
+    checkForTurn,
+    gameStarted
 };
