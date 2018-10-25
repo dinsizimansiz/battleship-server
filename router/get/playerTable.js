@@ -6,34 +6,42 @@ const adapter = require("../../eosbattleshipdemux/utils/adapter");
 
 const playerTable = async (req,res) => {
 
-    let username = req.body.username;
-    var userid = adapter.usedAccounts[username].accountName;
-    var dbConnection ;
+    let username = req.query.username;
+    if(!username)
+    {
+        return res.status(400).json({
+            success : false,
+            err : "Username is undefined."
+        });
+    }
     if(adapter.usedAccounts[username] === undefined)
     {
-        res.status(400).json({
+        return res.status(400).json({
             success : false,
             err : "User is not in a game."
         });
     }
-    MongoClient().connect("mongodb://localhost:27017",function(err,dbObject) {
-        if(err)
-        {
-            return res.status.json({
-                success : false,
-                err : err
-            });
-        }
-        dbConnection = dbObject.db("battleship")
-    });
+    var userid = adapter.usedAccounts[username].accountName;
+
     try
     {
-        var game = await dbConnection.collection("games").findOne({$or : [{host : {userid : userid}},{challenger : {userid : userid}}]});
-        var user = getUser(game,userid);
-        const table = table(user.playerTable);
-        return res.status(200).json({
-            success : true,
-            payload : table
+        MongoClient("mongodb://localhost:27017").connect(function(err,dbObject) {
+            if(err)
+            {
+                return res.status.json({
+                    success : false,
+                    err : err
+                });
+            }
+            let dbConnection = dbObject.db("battleship");
+            dbConnection.collection("games").findOne({$or : [{"host.userid" : userid},{"challenger.userid" :userid}]},function(err,game){
+                let user = getUser(game,userid);
+                const playerTable = table(user.playerTable);
+                return res.status(200).json({
+                    success : true,
+                    payload : playerTable
+                });
+            });
         });
     }
     catch(err)

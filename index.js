@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 var router = require("./router");
 
 var app = require("express")();
-app.use(router);
+app.use("/",router);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 

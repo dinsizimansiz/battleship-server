@@ -4,7 +4,15 @@ const adapter = require("../../eosbattleshipdemux/utils/adapter");
 
 const status = (req,res) => {
 
-    const username = req.body.username;
+    let username = req.query.username;
+    if(!username)
+    {
+        return res.status(400).json({
+            success : false,
+            err : "Username is undefined."
+        });
+    }
+
     if(adapter.usedAccounts[username] !== undefined)
     {
         return res.status(200).json({
