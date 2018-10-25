@@ -27,13 +27,16 @@ const unplacedShips = async (req, res) => {
                 });
             }
             let dbConnection = dbObject.db("battleship");
-            var game = dbConnection.collection("games").findOne({$or : [{"host.userid": userid},{"challenger.userid" : userid }]});
-            var user = getUser(game,gameid);
-            const ships = printers.placedShips(user.playerTable);
-            return res.status(200).json({
-               success : true,
-               payload : ships
-            });
+            dbConnection.collection("games").findOne({$or : [{"host.userid": userid},{"challenger.userid" : userid }]})
+                .then((game) =>{
+                    let user = getUser(game,userid);
+                    const ships = printers.placedShips(user.playerTable);
+                    return res.status(200).json({
+                        success : true,
+                        payload : ships
+                    });
+                });
+
         });
 
     }

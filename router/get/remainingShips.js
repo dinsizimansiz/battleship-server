@@ -35,13 +35,16 @@ const remainingShips = async (req, res) => {
                 });
             }
             let dbConnection = dbObject.db("battleship")
-            let game = dbConnection.collection("games").findOne({$or : [{"host.userid" : userid},{"challenger.userid" : userid }]});
-            let user = getUser(game,gameid);
-            const ships = printers.remainingShips(user.playerTable);
-            return res.status(200).json({
-                success : true,
-                payload : ships
+            dbConnection.collection("games").findOne({$or : [{"host.userid" : userid},{"challenger.userid" : userid }]})
+                .then((game) =>{
+                let user = getUser(game,userid);
+                const ships = printers.remainingShips(user.playerTable);
+                return res.status(200).json({
+                    success : true,
+                    payload : ships
+                });
             });
+
         });
 
     }
