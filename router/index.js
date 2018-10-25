@@ -10,6 +10,7 @@ router.get("/opponentguesses",getMethods.getOpponentGuesses);
 router.get("/status",getMethods.status);
 router.get("/isturn",getMethods.checkForTurn);
 router.get("/started",getMethods.gameStarted);
+router.get("/user",getMethods.user);
 router.post("/dequeue",postMethods.dequeue);
 router.post("/enqueue",postMethods.enqueue);
 router.post("/makemove",postMethods.makeMove);

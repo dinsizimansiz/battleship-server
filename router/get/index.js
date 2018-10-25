@@ -6,6 +6,7 @@ const playerTable = require("./playerTable");
 const status = require("./status");
 const checkForTurn = require("./isTurn");
 const gameStarted = require("./gameStarted");
+const user = require("./user");
 
 
 module.exports = {
@@ -16,5 +17,6 @@ module.exports = {
     getOpponentGuesses,
     status,
     checkForTurn,
-    gameStarted
+    gameStarted,
+    user
 };
